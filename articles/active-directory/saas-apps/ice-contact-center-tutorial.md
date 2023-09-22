@@ -26,7 +26,7 @@ In this tutorial, you'll learn how to integrate ice Contact Center with Microsof
 To get started, you need the following items:
 
 * A Microsoft Entra subscription. If you don't have a subscription, you can get a [free account](https://azure.microsoft.com/free/).
-* ice Contact Center single sign-on (SSO) enabled subscription.
+* ice Contact Center single sign-on (SSO) enabled subscription. Coordinate with ComputerTalk.
 
 > [!NOTE]
 > This integration is also available to use from Microsoft Entra US Government Cloud environment. You can find this application in the Microsoft Entra US Government Cloud Application Gallery and configure it in the same way as you do from public cloud.
@@ -104,9 +104,35 @@ Follow these steps to enable Microsoft Entra SSO.
 
 	![The Certificate download link](common/copy-metadataurl.png)
 
+## API Permissions
+
+Additional application permissions are required for Graph Search and Presence.
+
+1. Browse to **App Registrations** > **ice Contact Center** > **API Permissions**
+2. Select **Add a permission**
+3. Choose **Microsoft Graph** from the available APIs
+4. Choose type **delegated permissions**
+5. Choose and add the following permissions:
+   * User.Read
+   * User.ReadBasic.All
+   * User.Read.All **(require admin consent)**
+   * OrgContact.Read.All **(require admin consent)**
+   * Directory.AccessAsUser.All **(require admin consent)**
+   * Presence.Read.All
+6. **Grant Admin consent for the tenant**
+
+## Authentication Settings
+
+Authentication configuration must be set to allow usage of the API. This allows GUID mapping to query Entra ID to link user accounts.
+
+1. Browse to **Authentication** > **Add a platform**
+2. Select **Mobile and desktop applications**
+3. Select the checkbox for https://login.microsoft.online.com/common/oauth2/nativeclient as the Redirect URI
+4. Add http://localhost as another allowed redirect URI (note - this is http, not https)
+
 <a name='create-an-azure-ad-test-user'></a>
 
-### Create a Microsoft Entra test user
+## Create a Microsoft Entra test user
 
 In this section, you'll create a test user called B.Simon.
 
@@ -140,7 +166,7 @@ To configure single sign-on on **ice Contact Center** side, you need to send the
 
 ### Create ice Contact Center test user
 
-In this section, you create a user called Britta Simon in ice Contact Center. Work with [ice Contact Center support team](mailto:support@computer-talk.com) to add the users in the ice Contact Center platform. Users must be created and activated before you use single sign-on.
+In this section, you create a user called Britta Simon in ice Contact Center. Work with [ice Contact Center support team](mailto:support@computer-talk.com) to add the users in the ice Contact Center platform. Users must be created and activated before you use single sign-on, including the user's GUID.
 
 ## Test SSO 
 
